@@ -1,5 +1,5 @@
 const asyncHandler=(requestHandler)=>{
-    (req,res,next)=>{
+    return (req,res,next)=>{
         Promise.resolve(requestHandler(req,res,next)).catch((err)=>next(err))
     }
 }
@@ -7,7 +7,7 @@ const asyncHandler=(requestHandler)=>{
 export {asyncHandler}
 
 // const asyncHandler = () => {}
-// const asyncHandler=(fn)=>{()=>{}}
+// const asyncHandler=(fn)=>{()=>{}}// this is an highor order function which is except a function
 // or
 // const asyncHandler=(fn)=>()=>{}
 // const asyncHandler=(fn)=>async()=>{}
