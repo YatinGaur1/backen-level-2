@@ -8,8 +8,8 @@ const registerUser= asyncHandler(async (req,res)=>{
     
     //get user details from the frontend
     const{fullName,username,email,password}=req.body
-    console.log("email",email);
-    console.log("password",password)
+   // console.log("email",email);
+   // console.log("password",password)
 
    //validation check ->1.not empty etc.
     if(
@@ -21,7 +21,7 @@ const registerUser= asyncHandler(async (req,res)=>{
     }
 
     //check if user already exits:1.username,2.email etc.
-   const existedUser= User.findOne({
+   const existedUser= await User.findOne({
             $or:[{username},{email}]
         })
      if (existedUser){
@@ -31,7 +31,12 @@ const registerUser= asyncHandler(async (req,res)=>{
 
      //check for images,check for avatar and localpath is known as server path not cloudinary server path.
     const avatarLocalpath= req.files?.avatar[0]?.path;
-    const coverImageLocalpath=req.files?.converImage[0]?.path;
+   // const coverImageLocalpath=req.files?.coverImage[0]?.path; this is not working for when converImage is not given.
+
+   let coverImageLocalpath;
+   if(req.files && Array.isArray(req.files.coverImage) && req.files.coverImage.length>0){
+    coverImageLocalpath=req.files.coverImage[0].path;
+   }
 
     if(!avatarLocalpath){
         throw new ApiError(400,"Avatar file is required")
@@ -67,9 +72,8 @@ const registerUser= asyncHandler(async (req,res)=>{
    }
 
    //return res
-   return res.status(201).json(
+   return res.status(201).json( 
     new ApiResponse(200,createdUser,"User registered successfully")
-   )
-})
+)})
 
 export {registerUser}

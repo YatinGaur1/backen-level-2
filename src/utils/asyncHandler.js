@@ -4,7 +4,7 @@ const asyncHandler=(requestHandler)=>{
     }
 }
 
-export {asyncHandler}
+export {asyncHandler} 
 
 // const asyncHandler = () => {}
 // const asyncHandler=(fn)=>{()=>{}}// this is an highor order function which is except a function
