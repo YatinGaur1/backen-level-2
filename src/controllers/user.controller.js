@@ -165,7 +165,6 @@ const loggedOutUser=asyncHandler(async(req,res)=>{
     .clearCookie("refreshToken",options)
     .json(new ApiResponse(200,{},"User logged Out Successfully"))
 })
-
 const refreshAccessToken=asyncHandler(async(req,res=>{
     const incomingRefreshToken=req.cookies.refreshToken || req.body.refreshToken //this 2 option for  mobile
     if(!incomingRefreshToken){
@@ -206,7 +205,6 @@ const refreshAccessToken=asyncHandler(async(req,res=>{
      throw new ApiError(401,error?.message || "Invalid refresh token")
    }
 }))
-
 const changeCurrentPassword=asyncHandler(async(req,res)=>{
     const {oldPassword,newPassword}=req.body;
 
@@ -225,13 +223,11 @@ const changeCurrentPassword=asyncHandler(async(req,res)=>{
     .status(200)
     .json(new ApiResponse(200,{},"Password change successfully"))
 })
-
 const getCurrentUser=asyncHandler(async(req,res)=>{
     return res
     .status(200)
     .json(200,req.user,"current user fetched successfully")
 })
-
 const updateAccountDetails=asyncHandler(async(req,res)=>{
     const {fullName,email}=req.body;
 
@@ -251,7 +247,6 @@ const updateAccountDetails=asyncHandler(async(req,res)=>{
     .status(200)
     .json(new ApiResponse(200,user,"Accont details update successfully"))
 })
-
 const updateUserAvatar=asyncHandler(async(req,res)=>{
     const avatarLocalPath=req.file?.path
 
@@ -279,7 +274,6 @@ const updateUserAvatar=asyncHandler(async(req,res)=>{
     .status(200)
     .json( new ApiResponse(200,user,"avatar update successfully") )
 })
-
 const updateUserCoverImage=asyncHandler(async(req,res)=>{
     const coverImageLocalPath=req.file?.path
 
