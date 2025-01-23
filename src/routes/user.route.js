@@ -45,7 +45,7 @@ router
 router
   .route("/update-coverImage")
   .patch(verifyJWT, upload.single("coverImage"), updateUserCoverImage);
-router.route("/c/:username").get(verifyJWT, getUserChannelProfile);
+router.route("/c/:username").get(verifyJWT, getUserChannelProfile);//here we have to give actual username in the search box without colon
 router.route("/history").get(verifyJWT, getWatchHistory);
 
 export default router;
